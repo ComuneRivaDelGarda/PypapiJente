@@ -3,18 +3,27 @@
  * and open the template in the editor.
  */
 
+import com.axiastudio.pypapi.plugins.jente.JEnteHelper;
+import it.arezzo.infor.jente.jfinanziaria.services.Movimento;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
  * @author AXIA Studio (http://www.axiastudio.com)
  */
 public class JEnteJUnitTest {
+    
+    private static final String NUMERO = "8399";
+    private static final String ORGANO = "DT";
+    private static final String ANNO = "2012";
+    private static final String RESPONSABILE = "0180";
+    
+    private JEnteHelper jEnteHelper;
     
     public JEnteJUnitTest() {
     }
@@ -29,14 +38,70 @@ public class JEnteJUnitTest {
     
     @Before
     public void setUp() {
+        this.jEnteHelper = new JEnteHelper("JENTE");
     }
     
     @After
     public void tearDown() {
     }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    
+    @Test
+    public void testRichiestaEsisteBozzaOAtto() {
+
+        // se non esiste lo creo, e poi verifico che effettivamente esista
+        if( !this.jEnteHelper.chiamataRichiestaEsisteBozzaOAtto("A", ORGANO, ANNO, NUMERO) ){
+            this.jEnteHelper.chiamataRichiestaInserimentoBozzaOAtto("A", ORGANO, ANNO, NUMERO, RESPONSABILE);
+        }
+        assert this.jEnteHelper.chiamataRichiestaEsisteBozzaOAtto("A", ORGANO, ANNO, NUMERO) == true;
+
+        // lo cancello e verifico che non esiste più
+        assert this.jEnteHelper.chiamataRichiestaCancellazioneBozzaOAtto("A", ORGANO, ANNO, NUMERO) == true;
+        assert this.jEnteHelper.chiamataRichiestaEsisteBozzaOAtto("A", ORGANO, ANNO, NUMERO) == false;
+        
+    }
+    
+    @Test
+    public void testRichiestaElencoMovimenti() {
+        
+        List<Movimento> movimenti = this.jEnteHelper.chiamataRichiestaElencoMovimenti("A", "DT", "2009", "1150");
+        if( movimenti != null ){
+            assert movimenti.size() == 6;
+            for( Movimento movimento: movimenti ){
+                String importo = movimento.getMovImpAcce().getImporto();
+            }
+        }
+        
+    }
+    
+    @Test
+    public void testRichiestaInserimentoBozzaOAtto() {
+
+        if( this.jEnteHelper.chiamataRichiestaEsisteBozzaOAtto("A", ORGANO, ANNO, NUMERO) ){
+            this.jEnteHelper.chiamataRichiestaCancellazioneBozzaOAtto("A", ORGANO, ANNO, NUMERO);
+        }
+        assert this.jEnteHelper.chiamataRichiestaInserimentoBozzaOAtto("A", ORGANO, ANNO, NUMERO, RESPONSABILE) == true;
+        assert this.jEnteHelper.chiamataRichiestaEsisteBozzaOAtto("A", ORGANO, ANNO, NUMERO) == true;
+        assert this.jEnteHelper.chiamataRichiestaCancellazioneBozzaOAtto("A", ORGANO, ANNO, NUMERO) == true;
+        
+    }
+    
+    @Test
+    public void testRichiestaTrasformazioneBozzaInAtto() {
+        
+        // se esiste l'atto lo cancello; se non esiste la bozza la creo
+        if( this.jEnteHelper.chiamataRichiestaEsisteBozzaOAtto("A", ORGANO, ANNO, NUMERO) ){
+            assert this.jEnteHelper.chiamataRichiestaCancellazioneBozzaOAtto("A", ORGANO, ANNO, NUMERO) == true;
+        }
+        
+        if( !this.jEnteHelper.chiamataRichiestaEsisteBozzaOAtto("B", ORGANO, ANNO, NUMERO) ){
+            assert this.jEnteHelper.chiamataRichiestaInserimentoBozzaOAtto("B", ORGANO, ANNO, NUMERO, RESPONSABILE) == true;
+        }
+        
+        assert this.jEnteHelper.chiamataRichiestaTrasformazioneBozzaInAtto("B", ORGANO, ANNO, NUMERO) == true;
+        assert this.jEnteHelper.chiamataRichiestaEsisteBozzaOAtto("A", ORGANO, ANNO, NUMERO) == true;
+        
+        // ripristino
+        this.jEnteHelper.chiamataRichiestaCancellazioneBozzaOAtto("A", ORGANO, ANNO, NUMERO);
+        
+    }
 }
