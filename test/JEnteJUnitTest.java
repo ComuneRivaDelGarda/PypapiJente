@@ -22,6 +22,7 @@ public class JEnteJUnitTest {
     private static final String ORGANO = "DT";
     private static final String ANNO = "2012";
     private static final String RESPONSABILE = "0180";
+    private static final String DATAATTOOBOZZA = "31/12/2012";
     
     private JEnteHelper jEnteHelper;
     
@@ -50,7 +51,7 @@ public class JEnteJUnitTest {
 
         // se non esiste lo creo, e poi verifico che effettivamente esista
         if( !this.jEnteHelper.chiamataRichiestaEsisteBozzaOAtto("A", ORGANO, ANNO, NUMERO) ){
-            this.jEnteHelper.chiamataRichiestaInserimentoBozzaOAtto("A", ORGANO, ANNO, NUMERO, RESPONSABILE);
+            this.jEnteHelper.chiamataRichiestaInserimentoBozzaOAtto("A", ORGANO, ANNO, NUMERO, RESPONSABILE, DATAATTOOBOZZA);
         }
         assert this.jEnteHelper.chiamataRichiestaEsisteBozzaOAtto("A", ORGANO, ANNO, NUMERO) == true;
 
@@ -79,7 +80,7 @@ public class JEnteJUnitTest {
         if( this.jEnteHelper.chiamataRichiestaEsisteBozzaOAtto("A", ORGANO, ANNO, NUMERO) ){
             this.jEnteHelper.chiamataRichiestaCancellazioneBozzaOAtto("A", ORGANO, ANNO, NUMERO);
         }
-        assert this.jEnteHelper.chiamataRichiestaInserimentoBozzaOAtto("A", ORGANO, ANNO, NUMERO, RESPONSABILE) == true;
+        assert this.jEnteHelper.chiamataRichiestaInserimentoBozzaOAtto("A", ORGANO, ANNO, NUMERO, RESPONSABILE, DATAATTOOBOZZA) == true;
         assert this.jEnteHelper.chiamataRichiestaEsisteBozzaOAtto("A", ORGANO, ANNO, NUMERO) == true;
         assert this.jEnteHelper.chiamataRichiestaCancellazioneBozzaOAtto("A", ORGANO, ANNO, NUMERO) == true;
         
@@ -94,7 +95,7 @@ public class JEnteJUnitTest {
         }
         
         if( !this.jEnteHelper.chiamataRichiestaEsisteBozzaOAtto("B", ORGANO, ANNO, NUMERO) ){
-            assert this.jEnteHelper.chiamataRichiestaInserimentoBozzaOAtto("B", ORGANO, ANNO, NUMERO, RESPONSABILE) == true;
+            assert this.jEnteHelper.chiamataRichiestaInserimentoBozzaOAtto("B", ORGANO, ANNO, NUMERO, RESPONSABILE, DATAATTOOBOZZA) == true;
         }
         
         assert this.jEnteHelper.chiamataRichiestaTrasformazioneBozzaInAtto("B", ORGANO, ANNO, NUMERO) == true;
