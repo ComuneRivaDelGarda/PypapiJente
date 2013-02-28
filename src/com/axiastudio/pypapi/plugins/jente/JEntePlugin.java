@@ -4,11 +4,19 @@
  */
 package com.axiastudio.pypapi.plugins.jente;
 
+import com.axiastudio.pypapi.Register;
 import com.axiastudio.pypapi.plugins.IPlugin;
 import com.axiastudio.pypapi.ui.Dialog;
 import com.axiastudio.pypapi.ui.Window;
 import com.axiastudio.pypapi.ui.widgets.PyPaPiToolBar;
+import com.axiastudio.suite.base.entities.IUtente;
+import com.axiastudio.suite.base.entities.Utente;
+import com.axiastudio.suite.deliberedetermine.entities.Determina;
+import com.axiastudio.suite.deliberedetermine.entities.ServizioDetermina;
+import com.axiastudio.suite.finanziaria.entities.Servizio;
 import com.trolltech.qt.gui.QWidget;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 
 /**
@@ -43,8 +51,6 @@ public class JEntePlugin implements IPlugin {
     }
 
     public void setup(){
-        System.out.println("setup");
-        
     }
     
     @Override
@@ -53,8 +59,27 @@ public class JEntePlugin implements IPlugin {
     }
     
     public void showForm() {
-        System.out.println("ok");
-        Finanziaria form = new Finanziaria();
+        String utente = ((Utente) Register.queryUtility(IUtente.class)).getLogin();
+        Determina determina = (Determina) ((Window) this.parent).getContext().getCurrentEntity();
+        String anno = determina.getIdPratica().substring(0, 4);
+        String numero = ((Integer) Integer.parseInt(determina.getIdPratica().substring(4))).toString();
+        Boolean vistoResponsabile = determina.getVistoResponsabile();
+        String rProc=null;
+        for( ServizioDetermina servizioDetermina: determina.getServizioDeterminaCollection() ){
+            rProc = servizioDetermina.getServizio().getUfficio().getId().toString();
+            //rProc = "0181";
+            break;
+        }
+        String organoSettore = "DT";
+        
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String dataDetermina = dateFormat.format(determina.getDataPratica());
+        
+        String dataVistoResponsabile = null;
+        if( determina.getDataVistoResponsabile() != null ){
+            dataVistoResponsabile = dateFormat.format(determina.getDataVistoResponsabile());
+        }
+        Finanziaria form = new Finanziaria(anno, organoSettore, numero, utente, rProc, vistoResponsabile, dataDetermina, dataVistoResponsabile);
         form.show();
     }
 }

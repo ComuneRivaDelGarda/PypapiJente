@@ -36,7 +36,13 @@ public class JEnteHelper {
     private static RispostaGestioneProposte gestioneProposte(RichiestaGestioneProposte richiesta) {
         JFinanziariaService service = new JFinanziariaService();
         JFinanziariaServices port = service.getJFinanziariaPort();
-        return port.gestioneProposte(richiesta);
+        RispostaGestioneProposte res = null;
+        try {
+            res = port.gestioneProposte(richiesta);
+        } catch (Exception ex) {
+            Logger.getLogger(JEnteHelper.class.getName()).log(Level.SEVERE, "Connessione al web service jEnte fallita.");
+        }
+        return res;
     }
 
     public Boolean chiamataRichiestaEsisteBozzaOAtto(String bozzaOAtto, String organoSettore, String anno, String numero){
@@ -87,7 +93,7 @@ public class JEnteHelper {
         return null;
     }
     
-    public Boolean chiamataRichiestaInserimentoBozzaOAtto(String bozzaOAtto, String organoSettore, String anno, String numero, String rProc){
+    public Boolean chiamataRichiestaInserimentoBozzaOAtto(String bozzaOAtto, String organoSettore, String anno, String numero, String rProc, String dataBozzaOAtto){
         try {
             RichiestaGestioneProposte rec = new RichiestaGestioneProposte();
             rec.setUserName("JENTE");
@@ -98,8 +104,8 @@ public class JEnteHelper {
             rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setOrganoSettore(organoSettore);
             rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setAnno(anno);
             rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setNumero(numero);
-            rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setData("31/12/2012");
-            rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setOggetto("Inserito da PyPaPi: "+anno+" "+numero);
+            rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setData(dataBozzaOAtto);
+            rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setOggetto("Inserimento automatico: "+anno+" "+numero);
             rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setValidoVariazioni("N");
             rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setValidoImpegni("S");
             rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setValidoAccertamenti("N");
@@ -158,11 +164,13 @@ public class JEnteHelper {
             rec.getRichiestaElencoMovimenti().getChiaveBozzaOAtto().setAnno(anno);
             rec.getRichiestaElencoMovimenti().getChiaveBozzaOAtto().setNumero(numero);
             RispostaGestioneProposte res = JEnteHelper.gestioneProposte(rec);
-            if (res.isOk()) {
-                return res.getRispostaElencoMovimenti().getMovimento();
-            } else {
-                Logger.getLogger(JEnteHelper.class.getName()).log(Level.SEVERE, "Consultazione fallita: {0}", res.getMessage());
-                Logger.getLogger(JEnteHelper.class.getName()).log(Level.SEVERE, "Consultazione fallita: {0}", res.getRispostaElencoMovimenti().getMessage());
+            if( res != null ){
+                if ( res.isOk()) {
+                    return res.getRispostaElencoMovimenti().getMovimento();
+                } else {
+                    Logger.getLogger(JEnteHelper.class.getName()).log(Level.SEVERE, "Consultazione fallita: {0}", res.getMessage());
+                    Logger.getLogger(JEnteHelper.class.getName()).log(Level.SEVERE, "Consultazione fallita: {0}", res.getRispostaElencoMovimenti().getMessage());
+                }
             }
         } catch (Exception ex) {
             Logger.getLogger(JEnteHelper.class.getName()).log(Level.SEVERE, null, ex);
