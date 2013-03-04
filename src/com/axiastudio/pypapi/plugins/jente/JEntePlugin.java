@@ -13,7 +13,6 @@ import com.axiastudio.suite.base.entities.IUtente;
 import com.axiastudio.suite.base.entities.Utente;
 import com.axiastudio.suite.deliberedetermine.entities.Determina;
 import com.axiastudio.suite.deliberedetermine.entities.ServizioDetermina;
-import com.axiastudio.suite.finanziaria.entities.Servizio;
 import com.trolltech.qt.gui.QWidget;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -39,7 +38,12 @@ public class JEntePlugin implements IPlugin {
 
     @Override
     public void install(QWidget parent) {
-        if( Window.class.isInstance(parent) ){
+        this.install(parent, Boolean.TRUE);
+    }
+
+    @Override
+    public void install(QWidget parent, Boolean addToolbar) {
+        if( Window.class.isInstance(parent) && addToolbar){
             JEnteMenuBar bar = new JEnteMenuBar("JEnte plugin", (Window) parent, this);
             ((Window) parent).addToolBar(bar);
             this.parent = (Window) parent;
