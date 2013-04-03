@@ -29,6 +29,8 @@ public class FormMovimenti extends QDialog {
     private final String dataDetermina;
     private final String dataVistoResponsabile;
     
+    private final Boolean READONLY=true;
+    
     public FormMovimenti(String anno, String organoSettore, String numero, String utente, String rProc, Boolean vistoResponsabile, String dataDetermina, String dataVistoResponsabile){
         super();
         this.anno = anno;
@@ -39,7 +41,10 @@ public class FormMovimenti extends QDialog {
         this.vistoResponsabile = vistoResponsabile;
         this.dataDetermina = dataDetermina;
         this.dataVistoResponsabile = dataVistoResponsabile;
-        this.presenzaAttoOBozza();
+        if( !READONLY ){
+             // XXX: altrimenti crea bozza o trasforma in atto
+            this.presenzaAttoOBozza();
+        }
         this.initWebView();        
     }
     
