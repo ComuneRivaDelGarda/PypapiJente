@@ -14,7 +14,7 @@ import java.text.MessageFormat;
  *
  * @author AXIA Studio (http://www.axiastudio.com)
  */
-public class Finanziaria extends QDialog {
+public class FormMovimenti extends QDialog {
     
     private static final String URLTEMPLATE = "http://{0}/jente/ControllerView?codeFunzione=FN&azione=proposteImpAcc&attoBozza={1}&organoProvvedimento=DT&annoProvvedimento={2}&numeroProvvedimento={3}&action=it.arezzo.infor.jente.jfinanziaria.base.proc.PFNInizio&rProc={4}&utente={5}";
     private static final String HOSTJENTE = "jente-ws";
@@ -29,7 +29,7 @@ public class Finanziaria extends QDialog {
     private final String dataDetermina;
     private final String dataVistoResponsabile;
     
-    public Finanziaria(String anno, String organoSettore, String numero, String utente, String rProc, Boolean vistoResponsabile, String dataDetermina, String dataVistoResponsabile){
+    public FormMovimenti(String anno, String organoSettore, String numero, String utente, String rProc, Boolean vistoResponsabile, String dataDetermina, String dataVistoResponsabile){
         super();
         this.anno = anno;
         this.organoSettore = organoSettore;
