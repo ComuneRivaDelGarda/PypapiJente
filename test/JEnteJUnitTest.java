@@ -69,6 +69,7 @@ public class JEnteJUnitTest {
             assert movimenti.size() == 6;
             for( Movimento movimento: movimenti ){
                 String importo = movimento.getMovImpAcce().getImporto();
+                System.out.println("Importo: " + importo);
             }
         }
         

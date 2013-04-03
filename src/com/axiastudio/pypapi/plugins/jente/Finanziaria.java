@@ -39,6 +39,7 @@ public class Finanziaria extends QDialog {
         this.vistoResponsabile = vistoResponsabile;
         this.dataDetermina = dataDetermina;
         this.dataVistoResponsabile = dataVistoResponsabile;
+        this.presenzaAttoOBozza();
         this.initWebView();        
     }
     
@@ -56,9 +57,11 @@ public class Finanziaria extends QDialog {
                 if( !vistoResponsabile ){
                     // creo una bozza se la determina non è firmata dal responsabile
                     jEnteHelper.chiamataRichiestaInserimentoBozzaOAtto("B", this.organoSettore, this.anno, this.numero, this.rProc, this.dataDetermina);
+                    this.setAttoOBozza("B");
                 } else {
                     // altrimenti creo direttamente un atto
                     jEnteHelper.chiamataRichiestaInserimentoBozzaOAtto("A", this.organoSettore, this.anno, this.numero, this.rProc, this.dataVistoResponsabile);
+                    this.setAttoOBozza("A");
                 }
             }
         }
@@ -76,7 +79,7 @@ public class Finanziaria extends QDialog {
     }
     
     private void reload(){
-        String attoBozza = "A";
+        //String attoBozza = "A";
         String url = MessageFormat.format(URLTEMPLATE,
                                           HOSTJENTE,
                                           this.getAttoOBozza(),

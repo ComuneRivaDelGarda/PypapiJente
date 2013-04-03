@@ -169,7 +169,9 @@ public class JEnteHelper {
                     return res.getRispostaElencoMovimenti().getMovimento();
                 } else {
                     Logger.getLogger(JEnteHelper.class.getName()).log(Level.SEVERE, "Consultazione fallita: {0}", res.getMessage());
-                    Logger.getLogger(JEnteHelper.class.getName()).log(Level.SEVERE, "Consultazione fallita: {0}", res.getRispostaElencoMovimenti().getMessage());
+                    if( res.getRispostaElencoMovimenti() != null ){
+                        Logger.getLogger(JEnteHelper.class.getName()).log(Level.SEVERE, "Consultazione fallita: {0}", res.getRispostaElencoMovimenti().getMessage());
+                    }
                 }
             }
         } catch (Exception ex) {

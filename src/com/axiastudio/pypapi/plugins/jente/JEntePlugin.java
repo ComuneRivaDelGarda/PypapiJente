@@ -70,7 +70,7 @@ public class JEntePlugin implements IPlugin {
         Boolean vistoResponsabile = determina.getVistoResponsabile();
         String rProc=null;
         for( ServizioDetermina servizioDetermina: determina.getServizioDeterminaCollection() ){
-            rProc = servizioDetermina.getServizio().getUfficio().getId().toString();
+            rProc = String.format("%04d", servizioDetermina.getServizio().getId());
             //rProc = "0181";
             break;
         }
