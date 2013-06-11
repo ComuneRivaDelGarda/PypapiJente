@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
-    <system systemId="http://192.168.90.4/jente/JFinanziariaServices?wsdl" uri="wsdl/192.168.90.4/jente/JFinanziariaServices.wsdl"/>
-    <system systemId="http://192.168.90.4:80/jente/JFinanziariaServices?xsd=1" uri="wsdl/192.168.90.4_80/jente/JFinanziariaServices.xsd_1.xsd"/>
-    <system systemId="http://jente-ws/jente/JFinanziariaServices?wsdl" uri="wsdl/jente-ws/jente/JFinanziariaServices.wsdl"/>
-    <system systemId="http://jente-ws:80/jente/JFinanziariaServices?xsd=1" uri="wsdl/jente-ws_80/jente/JFinanziariaServices.xsd_1.xsd"/>
-</catalog>
