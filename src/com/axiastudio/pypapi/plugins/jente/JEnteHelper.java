@@ -125,20 +125,20 @@ public class JEnteHelper {
         return false;
     }
 
-    public Boolean chiamataRichiestaTrasformazioneBozzaInAtto(String bozzaOAtto, String organoSettore, String anno, String numero){
+    public Boolean chiamataRichiestaTrasformazioneBozzaInAtto(String bozzaOAtto, String organoSettoreBozza, String annoBozza, String numeroBozza, String organoSettoreAtto, String annoAtto, String numeroAtto){
         try {
             RichiestaGestioneProposte rec = new RichiestaGestioneProposte();
             rec.setUserName("JENTE");
             rec.setTipo("TBA");
             rec.setRichiestaTrasformazioneBozzaInAtto(new RichiestaTrasformazioneBozzaInAtto());
             rec.getRichiestaTrasformazioneBozzaInAtto().setBozzaInAtto(new BozzaInAtto());
-            rec.getRichiestaTrasformazioneBozzaInAtto().getBozzaInAtto().setOrganoSettoreBozza(organoSettore);
-            rec.getRichiestaTrasformazioneBozzaInAtto().getBozzaInAtto().setAnnoBozza(anno);
-            rec.getRichiestaTrasformazioneBozzaInAtto().getBozzaInAtto().setNumeroBozza(numero);
-            rec.getRichiestaTrasformazioneBozzaInAtto().getBozzaInAtto().setOrganoSettoreAtto(organoSettore);
-            rec.getRichiestaTrasformazioneBozzaInAtto().getBozzaInAtto().setAnnoAtto(anno);
-            rec.getRichiestaTrasformazioneBozzaInAtto().getBozzaInAtto().setNumeroAtto(numero);
-            rec.getRichiestaTrasformazioneBozzaInAtto().getBozzaInAtto().setDataAtto("31/12/2012");
+            rec.getRichiestaTrasformazioneBozzaInAtto().getBozzaInAtto().setOrganoSettoreBozza(organoSettoreBozza);
+            rec.getRichiestaTrasformazioneBozzaInAtto().getBozzaInAtto().setAnnoBozza(annoBozza);
+            rec.getRichiestaTrasformazioneBozzaInAtto().getBozzaInAtto().setNumeroBozza(numeroBozza);
+            rec.getRichiestaTrasformazioneBozzaInAtto().getBozzaInAtto().setOrganoSettoreAtto(organoSettoreAtto);
+            rec.getRichiestaTrasformazioneBozzaInAtto().getBozzaInAtto().setAnnoAtto(annoAtto);
+            rec.getRichiestaTrasformazioneBozzaInAtto().getBozzaInAtto().setNumeroAtto(numeroAtto);
+            rec.getRichiestaTrasformazioneBozzaInAtto().getBozzaInAtto().setDataAtto("31/12/2012"); // TODO: data atto
             RispostaGestioneProposte res = JEnteHelper.gestioneProposte(rec);
             if (res.isOk()) {
                 return true;

@@ -19,23 +19,35 @@ public class FormMovimenti extends QDialog {
     private static final String URLTEMPLATE = "http://{0}/jente/ControllerView?codeFunzione=FN&azione=proposteImpAcc&attoBozza={1}&organoProvvedimento=DT&annoProvvedimento={2}&numeroProvvedimento={3}&action=it.arezzo.infor.jente.jfinanziaria.base.proc.PFNInizio&rProc={4}&utente={5}";
     private static final String HOSTJENTE = "jente-ws";
     private CustomWebView webView;
-    private final String anno;
-    private final String numero;
+
+    private final String annoBozza;
+    private final String organoSettoreBozza;
+    private final String numeroBozza;
+
+    private final String annoAtto;
+    private final String organoSettoreAtto;
+    private final String numeroAtto;
+
     private final String utente;
     private final String rProc;
     private final Boolean vistoResponsabile;
     private String attoOBozza;
-    private final String organoSettore;
     private final String dataDetermina;
     private final String dataVistoResponsabile;
     
-    private final Boolean READONLY=true;
+    private final Boolean READONLY=false;
     
-    public FormMovimenti(String anno, String organoSettore, String numero, String utente, String rProc, Boolean vistoResponsabile, String dataDetermina, String dataVistoResponsabile){
+    public FormMovimenti(String annoBozza, String organoSettoreBozza, String numeroBozza, String annoAtto, String organoSettoreAtto, String numeroAtto, String utente, String rProc, Boolean vistoResponsabile, String dataDetermina, String dataVistoResponsabile){
         super();
-        this.anno = anno;
-        this.organoSettore = organoSettore;
-        this.numero = numero;
+
+        this.annoBozza = annoBozza;
+        this.organoSettoreBozza = organoSettoreBozza;
+        this.numeroBozza = numeroBozza;
+
+        this.annoAtto = annoAtto;
+        this.organoSettoreAtto = organoSettoreAtto;
+        this.numeroAtto = numeroAtto;
+
         this.utente = utente;
         this.rProc = rProc;
         this.vistoResponsabile = vistoResponsabile;
@@ -44,6 +56,8 @@ public class FormMovimenti extends QDialog {
         if( !READONLY ){
              // XXX: altrimenti crea bozza o trasforma in atto
             this.presenzaAttoOBozza();
+        } else {
+            this.setAttoOBozza("A");
         }
         this.initWebView();        
     }
@@ -51,27 +65,28 @@ public class FormMovimenti extends QDialog {
     private void presenzaAttoOBozza() {
         JEnteHelper jEnteHelper = new JEnteHelper(this.utente);
         // se esiste già l'atto, prendo quello
-        if( jEnteHelper.chiamataRichiestaEsisteBozzaOAtto("A", this.organoSettore, this.anno, this.numero) ){
+        if( jEnteHelper.chiamataRichiestaEsisteBozzaOAtto("A", this.organoSettoreAtto, this.annoAtto, this.numeroAtto) ){
             this.setAttoOBozza("A"); 
         } else {
             // altrimenti se esiste la bozza prendo quella
-            if( jEnteHelper.chiamataRichiestaEsisteBozzaOAtto("B", this.organoSettore, this.anno, this.numero)){
+            if( jEnteHelper.chiamataRichiestaEsisteBozzaOAtto("B", this.organoSettoreBozza, this.annoBozza, this.numeroBozza)){
                 this.setAttoOBozza("B");
             } else {
                 // devo creare l'atto o la bozza
                 if( !vistoResponsabile ){
                     // creo una bozza se la determina non è firmata dal responsabile
-                    jEnteHelper.chiamataRichiestaInserimentoBozzaOAtto("B", this.organoSettore, this.anno, this.numero, this.rProc, this.dataDetermina);
+                    jEnteHelper.chiamataRichiestaInserimentoBozzaOAtto("B", this.organoSettoreBozza, this.annoBozza, this.numeroBozza, this.rProc, this.dataDetermina);
                     this.setAttoOBozza("B");
                 } else {
                     // altrimenti creo direttamente un atto
-                    jEnteHelper.chiamataRichiestaInserimentoBozzaOAtto("A", this.organoSettore, this.anno, this.numero, this.rProc, this.dataVistoResponsabile);
+                    jEnteHelper.chiamataRichiestaInserimentoBozzaOAtto("A", this.organoSettoreAtto, this.annoAtto, this.numeroAtto, this.rProc, this.dataVistoResponsabile);
                     this.setAttoOBozza("A");
                 }
             }
         }
         if( vistoResponsabile && "B".equals(this.getAttoOBozza()) ){
-            jEnteHelper.chiamataRichiestaTrasformazioneBozzaInAtto("B", this.organoSettore, this.anno, this.numero);
+            jEnteHelper.chiamataRichiestaTrasformazioneBozzaInAtto("B", this.organoSettoreBozza, this.annoBozza, this.numeroBozza, this.organoSettoreAtto, this.annoAtto, this.numeroAtto);
+            this.setAttoOBozza("A");
         }
     }
     
@@ -84,14 +99,26 @@ public class FormMovimenti extends QDialog {
     }
     
     private void reload(){
-        //String attoBozza = "A";
-        String url = MessageFormat.format(URLTEMPLATE,
+        String url;
+        if( "B".equals(this.getAttoOBozza()) ){
+            url = MessageFormat.format(URLTEMPLATE,
                                           HOSTJENTE,
                                           this.getAttoOBozza(),
-                                          this.getAnno(),
-                                          this.getNumero(),
+                                          this.getAnnoBozza(),
+                                          this.getNumeroBozza(),
                                           this.getrProc(), 
                                           this.getUtente());
+        } else if( "A".equals(this.getAttoOBozza()) ){
+            url = MessageFormat.format(URLTEMPLATE,
+                    HOSTJENTE,
+                    this.getAttoOBozza(),
+                    this.getAnnoAtto(),
+                    this.getNumeroAtto(),
+                    this.getrProc(),
+                    this.getUtente());
+        } else {
+            return;
+        }
         this.webView.load(new QUrl(url));
         this.webView.settings().setAttribute(QWebSettings.WebAttribute.JavascriptEnabled, true);
         this.webView.settings().setAttribute(QWebSettings.WebAttribute.JavascriptCanOpenWindows, true);
@@ -106,12 +133,20 @@ public class FormMovimenti extends QDialog {
         this.attoOBozza = attoOBozza;
     }
 
-    public String getAnno() {
-        return anno;
+    public String getAnnoBozza() {
+        return annoBozza;
     }
 
-    public String getNumero() {
-        return numero;
+    public String getNumeroBozza() {
+        return numeroBozza;
+    }
+
+    public String getAnnoAtto() {
+        return annoAtto;
+    }
+
+    public String getNumeroAtto() {
+        return numeroAtto;
     }
 
     public String getUtente() {

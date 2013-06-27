@@ -99,7 +99,7 @@ public class JEnteJUnitTest {
             assert this.jEnteHelper.chiamataRichiestaInserimentoBozzaOAtto("B", ORGANO, ANNO, NUMERO, RESPONSABILE, DATAATTOOBOZZA) == true;
         }
         
-        assert this.jEnteHelper.chiamataRichiestaTrasformazioneBozzaInAtto("B", ORGANO, ANNO, NUMERO) == true;
+        assert this.jEnteHelper.chiamataRichiestaTrasformazioneBozzaInAtto("B", ORGANO, ANNO, NUMERO, ORGANO, ANNO, NUMERO) == true;
         assert this.jEnteHelper.chiamataRichiestaEsisteBozzaOAtto("A", ORGANO, ANNO, NUMERO) == true;
         
         // ripristino
