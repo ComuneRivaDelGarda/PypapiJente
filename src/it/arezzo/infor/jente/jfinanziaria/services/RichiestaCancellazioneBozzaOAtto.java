@@ -1,0 +1,89 @@
+
+package it.arezzo.infor.jente.jfinanziaria.services;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+
+/**
+ * <p>Java class for anonymous complex type.
+ * 
+ * <p>The following schema fragment specifies the expected content contained within this class.
+ * 
+ * <pre>
+ * &lt;complexType>
+ *   &lt;complexContent>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;element name="chiaveBozzaOAtto" type="{http://infor.arezzo.it/jente/jfinanziaria/services}chiaveBozzaOAtto" minOccurs="0"/>
+ *         &lt;element name="cancellaProvvedimento" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *       &lt;/sequence>
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
+ * 
+ * 
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "", propOrder = {
+    "chiaveBozzaOAtto",
+    "cancellaProvvedimento"
+})
+@XmlRootElement(name = "richiestaCancellazioneBozzaOAtto")
+public class RichiestaCancellazioneBozzaOAtto {
+
+    protected ChiaveBozzaOAtto chiaveBozzaOAtto;
+    protected String cancellaProvvedimento;
+
+    /**
+     * Gets the value of the chiaveBozzaOAtto property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link ChiaveBozzaOAtto }
+     *     
+     */
+    public ChiaveBozzaOAtto getChiaveBozzaOAtto() {
+        return chiaveBozzaOAtto;
+    }
+
+    /**
+     * Sets the value of the chiaveBozzaOAtto property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ChiaveBozzaOAtto }
+     *     
+     */
+    public void setChiaveBozzaOAtto(ChiaveBozzaOAtto value) {
+        this.chiaveBozzaOAtto = value;
+    }
+
+    /**
+     * Gets the value of the cancellaProvvedimento property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getCancellaProvvedimento() {
+        return cancellaProvvedimento;
+    }
+
+    /**
+     * Sets the value of the cancellaProvvedimento property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCancellaProvvedimento(String value) {
+        this.cancellaProvvedimento = value;
+    }
+
+}
