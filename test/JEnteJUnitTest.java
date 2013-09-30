@@ -67,9 +67,11 @@ public class JEnteJUnitTest {
         List<Movimento> movimenti = this.jEnteHelper.chiamataRichiestaElencoMovimenti("A", "DT", "2009", "1150");
         if( movimenti != null ){
             assert movimenti.size() == 6;
+            System.out.println("Movimenti determina 1150-2009");
             for( Movimento movimento: movimenti ){
                 String importo = movimento.getMovImpAcce().getImporto();
-                System.out.println("Importo: " + importo);
+                String importoImpacc = movimento.getMovImpAcce().getImportoImpacc();
+                System.out.println("Importo - importoImpacc: " + importo + " - " + importoImpacc);
             }
         }
         
