@@ -4,7 +4,7 @@
  */
 
 import com.axiastudio.pypapi.plugins.jente.JEnteHelper;
-import it.arezzo.infor.jente.jfinanziaria.services.Movimento;
+import com.axiastudio.pypapi.plugins.jente.webservices.Movimento;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -87,7 +87,7 @@ public class JEnteJUnitTest {
         
     }
     
-    @Test
+    //@Test
     public void testRichiestaTrasformazioneBozzaInAtto() {
         
         // se esiste l'atto lo cancello; se non esiste la bozza la creo
