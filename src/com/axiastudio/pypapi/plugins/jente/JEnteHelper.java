@@ -4,19 +4,19 @@
  */
 package com.axiastudio.pypapi.plugins.jente;
 
-import it.arezzo.infor.jente.jfinanziaria.services.RichiestaGestioneProposte;
-import it.arezzo.infor.jente.jfinanziaria.services.RispostaGestioneProposte;
-import it.arezzo.infor.jente.jfinanziaria.services.JFinanziariaService;
-import it.arezzo.infor.jente.jfinanziaria.services.JFinanziariaServices;
-import it.arezzo.infor.jente.jfinanziaria.services.ChiaveBozzaOAtto;
-import it.arezzo.infor.jente.jfinanziaria.services.BozzaOAtto;
-import it.arezzo.infor.jente.jfinanziaria.services.Movimento;
-import it.arezzo.infor.jente.jfinanziaria.services.BozzaInAtto;
-import it.arezzo.infor.jente.jfinanziaria.services.RichiestaGestioneProposte.RichiestaEsisteBozzaOAtto;
-import it.arezzo.infor.jente.jfinanziaria.services.RichiestaGestioneProposte.RichiestaElencoMovimenti;
-import it.arezzo.infor.jente.jfinanziaria.services.RichiestaGestioneProposte.RichiestaInserimentoBozzaOAtto;
-import it.arezzo.infor.jente.jfinanziaria.services.RichiestaGestioneProposte.RichiestaCancellazioneBozzaOAtto;
-import it.arezzo.infor.jente.jfinanziaria.services.RichiestaGestioneProposte.RichiestaTrasformazioneBozzaInAtto;
+import com.axiastudio.pypapi.plugins.jente.webservices.RichiestaGestioneProposte;
+import com.axiastudio.pypapi.plugins.jente.webservices.RispostaGestioneProposte;
+import com.axiastudio.pypapi.plugins.jente.webservices.JFinanziariaService;
+import com.axiastudio.pypapi.plugins.jente.webservices.JFinanziariaServices;
+import com.axiastudio.pypapi.plugins.jente.webservices.ChiaveBozzaOAtto;
+import com.axiastudio.pypapi.plugins.jente.webservices.BozzaOAtto;
+import com.axiastudio.pypapi.plugins.jente.webservices.Movimento;
+import com.axiastudio.pypapi.plugins.jente.webservices.BozzaInAtto;
+import com.axiastudio.pypapi.plugins.jente.webservices.RichiestaGestioneProposte.RichiestaEsisteBozzaOAtto;
+import com.axiastudio.pypapi.plugins.jente.webservices.RichiestaGestioneProposte.RichiestaElencoMovimenti;
+import com.axiastudio.pypapi.plugins.jente.webservices.RichiestaGestioneProposte.RichiestaInserimentoBozzaOAtto;
+import com.axiastudio.pypapi.plugins.jente.webservices.RichiestaGestioneProposte.RichiestaCancellazioneBozzaOAtto;
+import com.axiastudio.pypapi.plugins.jente.webservices.RichiestaGestioneProposte.RichiestaTrasformazioneBozzaInAtto;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;

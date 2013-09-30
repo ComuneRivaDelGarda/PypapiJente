@@ -4,7 +4,7 @@
  */
 
 import com.axiastudio.pypapi.plugins.jente.JEnteHelper;
-import it.arezzo.infor.jente.jfinanziaria.services.Movimento;
+import com.axiastudio.pypapi.plugins.jente.webservices.Movimento;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -67,9 +67,11 @@ public class JEnteJUnitTest {
         List<Movimento> movimenti = this.jEnteHelper.chiamataRichiestaElencoMovimenti("A", "DT", "2009", "1150");
         if( movimenti != null ){
             assert movimenti.size() == 6;
+            System.out.println("Movimenti determina 1150-2009");
             for( Movimento movimento: movimenti ){
                 String importo = movimento.getMovImpAcce().getImporto();
-                System.out.println("Importo: " + importo);
+                String importoImpacc = movimento.getMovImpAcce().getImportoImpacc();
+                System.out.println("Importo - importoImpacc: " + importo + " - " + importoImpacc);
             }
         }
         
@@ -87,7 +89,7 @@ public class JEnteJUnitTest {
         
     }
     
-    @Test
+    //@Test
     public void testRichiestaTrasformazioneBozzaInAtto() {
         
         // se esiste l'atto lo cancello; se non esiste la bozza la creo
