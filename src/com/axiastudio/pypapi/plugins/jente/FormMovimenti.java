@@ -65,7 +65,7 @@ public class FormMovimenti extends QDialog {
     private void presenzaAttoOBozza() {
         JEnteHelper jEnteHelper = new JEnteHelper(this.utente);
         // se esiste già l'atto, prendo quello
-        if( jEnteHelper.chiamataRichiestaEsisteBozzaOAtto("A", this.organoSettoreAtto, this.annoAtto, this.numeroAtto) ){
+        if( this.numeroAtto != null && jEnteHelper.chiamataRichiestaEsisteBozzaOAtto("A", this.organoSettoreAtto, this.annoAtto, this.numeroAtto) ){
             this.setAttoOBozza("A"); 
         } else {
             // altrimenti se esiste la bozza prendo quella
