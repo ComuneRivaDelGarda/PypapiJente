@@ -32,12 +32,16 @@ public class FormMovimenti extends QDialog {
     private final String rProc;
     private final Boolean vistoResponsabile;
     private String attoOBozza;
+    private final String oggettoDetermina;
     private final String dataDetermina;
     private final String dataVistoResponsabile;
     
     private final Boolean READONLY=false;
-    
-    public FormMovimenti(String annoBozza, String organoSettoreBozza, String numeroBozza, String annoAtto, String organoSettoreAtto, String numeroAtto, String utente, String rProc, Boolean vistoResponsabile, String dataDetermina, String dataVistoResponsabile){
+
+    public FormMovimenti(String annoBozza, String organoSettoreBozza, String numeroBozza, String annoAtto, String organoSettoreAtto,
+                         String numeroAtto, String utente, String rProc, Boolean vistoResponsabile, String oggettoDetermina,
+                         String dataDetermina, String dataVistoResponsabile){
+
         super();
 
         this.annoBozza = annoBozza;
@@ -51,6 +55,7 @@ public class FormMovimenti extends QDialog {
         this.utente = utente;
         this.rProc = rProc;
         this.vistoResponsabile = vistoResponsabile;
+        this.oggettoDetermina = oggettoDetermina;
         this.dataDetermina = dataDetermina;
         this.dataVistoResponsabile = dataVistoResponsabile;
         if( !READONLY ){
@@ -75,11 +80,13 @@ public class FormMovimenti extends QDialog {
                 // devo creare l'atto o la bozza
                 if( !vistoResponsabile ){
                     // creo una bozza se la determina non è firmata dal responsabile
-                    jEnteHelper.chiamataRichiestaInserimentoBozzaOAtto("B", this.organoSettoreBozza, this.annoBozza, this.numeroBozza, this.rProc, this.dataDetermina);
+                    jEnteHelper.chiamataRichiestaInserimentoBozzaOAtto("B", this.organoSettoreBozza, this.annoBozza, this.numeroBozza,
+                           this.oggettoDetermina, this.rProc, this.dataDetermina);
                     this.setAttoOBozza("B");
                 } else {
                     // altrimenti creo direttamente un atto
-                    jEnteHelper.chiamataRichiestaInserimentoBozzaOAtto("A", this.organoSettoreAtto, this.annoAtto, this.numeroAtto, this.rProc, this.dataVistoResponsabile);
+                    jEnteHelper.chiamataRichiestaInserimentoBozzaOAtto("A", this.organoSettoreAtto, this.annoAtto, this.numeroAtto,
+                           this.oggettoDetermina, this.rProc, this.dataVistoResponsabile);
                     this.setAttoOBozza("A");
                 }
             }

@@ -95,7 +95,8 @@ public class JEnteHelper {
         return null;
     }
     
-    public Boolean chiamataRichiestaInserimentoBozzaOAtto(String bozzaOAtto, String organoSettore, String anno, String numero, String rProc, String dataBozzaOAtto){
+    public Boolean chiamataRichiestaInserimentoBozzaOAtto(String bozzaOAtto, String organoSettore, String anno, String numero,
+                                                          String oggetto, String rProc, String dataBozzaOAtto){
         try {
             RichiestaGestioneProposte rec = new RichiestaGestioneProposte();
             rec.setUserName("JENTE");
@@ -107,7 +108,8 @@ public class JEnteHelper {
             rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setAnno(anno);
             rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setNumero(numero);
             rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setData(dataBozzaOAtto);
-            rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setOggetto("Inserimento automatico: "+anno+" "+numero);
+//            rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setOggetto("Inserimento automatico: "+anno+" "+numero);
+            rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setOggetto(oggetto);
             rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setValidoVariazioni("N");
             rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setValidoImpegni("S");
             rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setValidoAccertamenti("N");
