@@ -54,7 +54,7 @@ public class CustomWebView extends QWebView {
         GIF2PNGMAP.put("Ultimo", "RecordLast16.png");
         GIF2PNGMAP.put("Rientra alla Lista", "BacktoList16.png");
     }
-    private static final String GIF2PNG = "var allImages = document.getElementsByTagName(\"img\"); for (var i = 0, len = allImages.length; i < len; ++i) '{' if (allImages[i].alt == \"{0}\") '{' allImages[i].src = \"{1}\" '}' '}'";
+    private static final String GIF2PNG = "var allImages = document.getElementsByTagName(\"img\"); for (var i = 0, len = allImages.length; i < len; ++i) '{' if (allImages[i].alt == \"{0}\") '{' allImages[i].src = \"{1}\" '}' if ( allImages[i].alt == \"\" ) '{' allImages[i].style.display = \"none\" '}' '}'";
     private static final String JSSTYPE = "document.getElementById(\"masthead_imenus\").style.display='none'; document.getElementById(\"footer\").style.display='none'; document.getElementById(\"imcontainer20\").style.visibility='hidden'; //table_list = document.getElementsByTagName(\"table\")";
     private QNetworkCookieJar cookieJar;
 
