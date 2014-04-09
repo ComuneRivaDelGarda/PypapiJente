@@ -35,12 +35,14 @@ public class FormMovimenti extends QDialog {
     private final String oggettoDetermina;
     private final String dataDetermina;
     private final String dataVistoResponsabile;
-    
+    private final String validoImpegni;
+    private final String validoAccertamenti;
+
     private final Boolean READONLY=false;
 
     public FormMovimenti(String annoBozza, String organoSettoreBozza, String numeroBozza, String annoAtto, String organoSettoreAtto,
                          String numeroAtto, String utente, String rProc, Boolean vistoResponsabile, String oggettoDetermina,
-                         String dataDetermina, String dataVistoResponsabile){
+                         String dataDetermina, String dataVistoResponsabile, String validoImpegni, String validoAccertamenti){
 
         super();
 
@@ -58,6 +60,8 @@ public class FormMovimenti extends QDialog {
         this.oggettoDetermina = oggettoDetermina;
         this.dataDetermina = dataDetermina;
         this.dataVistoResponsabile = dataVistoResponsabile;
+        this.validoImpegni = validoImpegni;
+        this.validoAccertamenti = validoAccertamenti;
         if( !READONLY ){
              // XXX: altrimenti crea bozza o trasforma in atto
             this.presenzaAttoOBozza();
@@ -81,18 +85,19 @@ public class FormMovimenti extends QDialog {
                 if( !vistoResponsabile ){
                     // creo una bozza se la determina non è firmata dal responsabile
                     jEnteHelper.chiamataRichiestaInserimentoBozzaOAtto("B", this.organoSettoreBozza, this.annoBozza, this.numeroBozza,
-                           this.oggettoDetermina, this.rProc, this.dataDetermina);
+                           this.oggettoDetermina, this.rProc, this.dataDetermina, this.validoImpegni, this.validoAccertamenti);
                     this.setAttoOBozza("B");
                 } else {
                     // altrimenti creo direttamente un atto
                     jEnteHelper.chiamataRichiestaInserimentoBozzaOAtto("A", this.organoSettoreAtto, this.annoAtto, this.numeroAtto,
-                           this.oggettoDetermina, this.rProc, this.dataVistoResponsabile);
+                           this.oggettoDetermina, this.rProc, this.dataVistoResponsabile, this.validoImpegni, this.validoAccertamenti);
                     this.setAttoOBozza("A");
                 }
             }
         }
         if( vistoResponsabile && "B".equals(this.getAttoOBozza()) ){
-            jEnteHelper.chiamataRichiestaTrasformazioneBozzaInAtto("B", this.organoSettoreBozza, this.annoBozza, this.numeroBozza, this.organoSettoreAtto, this.annoAtto, this.numeroAtto);
+            jEnteHelper.chiamataRichiestaTrasformazioneBozzaInAtto("B", this.organoSettoreBozza, this.annoBozza, this.numeroBozza,
+                    this.organoSettoreAtto, this.annoAtto, this.numeroAtto, this.dataDetermina);
             this.setAttoOBozza("A");
         }
     }

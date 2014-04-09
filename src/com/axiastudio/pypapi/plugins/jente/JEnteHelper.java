@@ -96,7 +96,8 @@ public class JEnteHelper {
     }
     
     public Boolean chiamataRichiestaInserimentoBozzaOAtto(String bozzaOAtto, String organoSettore, String anno, String numero,
-                                                          String oggetto, String rProc, String dataBozzaOAtto){
+                                                          String oggetto, String rProc, String dataBozzaOAtto,
+                                                          String validoImpegni, String validoAccertamenti){
         try {
             RichiestaGestioneProposte rec = new RichiestaGestioneProposte();
             rec.setUserName("JENTE");
@@ -111,8 +112,8 @@ public class JEnteHelper {
 //            rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setOggetto("Inserimento automatico: "+anno+" "+numero);
             rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setOggetto(oggetto);
             rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setValidoVariazioni("N");
-            rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setValidoImpegni("S");
-            rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setValidoAccertamenti("N");
+            rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setValidoImpegni(validoImpegni);
+            rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setValidoAccertamenti(validoAccertamenti);
             rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setValidoAssegnazioni("N");
             rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setResponsabileProcedimento(rProc);
             RispostaGestioneProposte res = JEnteHelper.gestioneProposte(rec);
@@ -127,8 +128,13 @@ public class JEnteHelper {
         return false;
     }
 
-    public Boolean chiamataRichiestaTrasformazioneBozzaInAtto(String bozzaOAtto, String organoSettoreBozza, String annoBozza, String numeroBozza, String organoSettoreAtto, String annoAtto, String numeroAtto){
+    public Boolean chiamataRichiestaTrasformazioneBozzaInAtto(String bozzaOAtto, String organoSettoreBozza, String annoBozza,
+                                                              String numeroBozza, String organoSettoreAtto, String annoAtto,
+                                                              String numeroAtto, String dataAtto){
         try {
+            if ( dataAtto == null ) {
+                dataAtto = "31/12/2012"; // TODO: data atto
+            }
             RichiestaGestioneProposte rec = new RichiestaGestioneProposte();
             rec.setUserName("JENTE");
             rec.setTipo("TBA");
@@ -140,7 +146,7 @@ public class JEnteHelper {
             rec.getRichiestaTrasformazioneBozzaInAtto().getBozzaInAtto().setOrganoSettoreAtto(organoSettoreAtto);
             rec.getRichiestaTrasformazioneBozzaInAtto().getBozzaInAtto().setAnnoAtto(annoAtto);
             rec.getRichiestaTrasformazioneBozzaInAtto().getBozzaInAtto().setNumeroAtto(numeroAtto);
-            rec.getRichiestaTrasformazioneBozzaInAtto().getBozzaInAtto().setDataAtto("31/12/2012"); // TODO: data atto
+            rec.getRichiestaTrasformazioneBozzaInAtto().getBozzaInAtto().setDataAtto(dataAtto);
             RispostaGestioneProposte res = JEnteHelper.gestioneProposte(rec);
             if (res.isOk()) {
                 return true;
@@ -154,7 +160,34 @@ public class JEnteHelper {
         return false;
 
     }
-    
+
+    public Boolean chiamataModificaEsecutivitaAtto(String bozzaOAtto, String organoSettore, String anno, String numero, String dataEsecutività, String tipoEsecutività){
+        try {
+            RichiestaGestioneProposte rec = new RichiestaGestioneProposte();
+            rec.setUserName("JENTE");
+            rec.setTipo("TBA");
+            rec.setRichiestaModificaBozzaOAtto(new RichiestaGestioneProposte.RichiestaModificaBozzaOAtto());
+            rec.getRichiestaModificaBozzaOAtto().setBozzaOAttoModificato(new BozzaOAtto());
+            rec.getRichiestaModificaBozzaOAtto().getBozzaOAttoModificato().setOrganoSettore(organoSettore);
+            rec.getRichiestaModificaBozzaOAtto().getBozzaOAttoModificato().setAnno(anno);
+            rec.getRichiestaModificaBozzaOAtto().getBozzaOAttoModificato().setNumero(numero);
+            rec.getRichiestaModificaBozzaOAtto().getBozzaOAttoModificato().setBozzaOAtto(bozzaOAtto);
+            rec.getRichiestaModificaBozzaOAtto().getBozzaOAttoModificato().setDataEsecutivita(dataEsecutività);
+            rec.getRichiestaModificaBozzaOAtto().getBozzaOAttoModificato().setTipoEsecutivita(tipoEsecutività);
+            RispostaGestioneProposte res = JEnteHelper.gestioneProposte(rec);
+            if (res.isOk()) {
+                return true;
+            } else {
+                Logger.getLogger(JEnteHelper.class.getName()).log(Level.SEVERE, "Modifica fallita: {0}", res.getMessage());
+                return false;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(JEnteHelper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+
+    }
+
     public List<Movimento> chiamataRichiestaElencoMovimenti(String bozzaOAtto, String organoSettore, String anno, String numero){
         List<Movimento> movimenti=null;
         try {
