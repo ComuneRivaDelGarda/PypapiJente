@@ -165,7 +165,7 @@ public class JEnteHelper {
         try {
             RichiestaGestioneProposte rec = new RichiestaGestioneProposte();
             rec.setUserName("JENTE");
-            rec.setTipo("TBA");
+            rec.setTipo("MBOA");
             rec.setRichiestaModificaBozzaOAtto(new RichiestaGestioneProposte.RichiestaModificaBozzaOAtto());
             rec.getRichiestaModificaBozzaOAtto().setBozzaOAttoModificato(new BozzaOAtto());
             rec.getRichiestaModificaBozzaOAtto().getBozzaOAttoModificato().setOrganoSettore(organoSettore);
