@@ -97,7 +97,8 @@ public class JEnteHelper {
     
     public Boolean chiamataRichiestaInserimentoBozzaOAtto(String bozzaOAtto, String organoSettore, String anno, String numero,
                                                           String oggetto, String rProc, String dataBozzaOAtto,
-                                                          String validoImpegni, String validoAccertamenti){
+                                                          String validoImpegni, String validoAccertamenti, String validoVariazioni,
+                                                          String validoAssegnazioni, String validoLiquidazioni){
         try {
             RichiestaGestioneProposte rec = new RichiestaGestioneProposte();
             rec.setUserName("JENTE");
@@ -111,10 +112,11 @@ public class JEnteHelper {
             rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setData(dataBozzaOAtto);
 //            rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setOggetto("Inserimento automatico: "+anno+" "+numero);
             rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setOggetto(oggetto);
-            rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setValidoVariazioni("N");
+            rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setValidoVariazioni(validoVariazioni);
             rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setValidoImpegni(validoImpegni);
             rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setValidoAccertamenti(validoAccertamenti);
-            rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setValidoAssegnazioni("N");
+            rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setValidoAssegnazioni(validoAssegnazioni);
+            rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setValidoLiquidazioni(validoLiquidazioni);
             rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setResponsabileProcedimento(rProc);
             RispostaGestioneProposte res = JEnteHelper.gestioneProposte(rec);
             if (res.isOk()) {
