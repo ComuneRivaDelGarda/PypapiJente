@@ -33,6 +33,10 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="numeroAttoLiq" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="dataAttoLiq" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="dataEsecAttoLiq" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="numeroRegistrazione" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="ritenute" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="codiceCig" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="codiceCup" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -59,7 +63,11 @@ import javax.xml.bind.annotation.XmlType;
     "annoAttoLiq",
     "numeroAttoLiq",
     "dataAttoLiq",
-    "dataEsecAttoLiq"
+    "dataEsecAttoLiq",
+    "numeroRegistrazione",
+    "ritenute",
+    "codiceCig",
+    "codiceCup"
 })
 public class FNLiquidazioniRigaDoc {
 
@@ -80,6 +88,10 @@ public class FNLiquidazioniRigaDoc {
     protected String numeroAttoLiq;
     protected String dataAttoLiq;
     protected String dataEsecAttoLiq;
+    protected String numeroRegistrazione;
+    protected String ritenute;
+    protected String codiceCig;
+    protected String codiceCup;
 
     /**
      * Gets the value of the annoDoc property.
@@ -487,6 +499,102 @@ public class FNLiquidazioniRigaDoc {
      */
     public void setDataEsecAttoLiq(String value) {
         this.dataEsecAttoLiq = value;
+    }
+
+    /**
+     * Gets the value of the numeroRegistrazione property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getNumeroRegistrazione() {
+        return numeroRegistrazione;
+    }
+
+    /**
+     * Sets the value of the numeroRegistrazione property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setNumeroRegistrazione(String value) {
+        this.numeroRegistrazione = value;
+    }
+
+    /**
+     * Gets the value of the ritenute property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getRitenute() {
+        return ritenute;
+    }
+
+    /**
+     * Sets the value of the ritenute property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setRitenute(String value) {
+        this.ritenute = value;
+    }
+
+    /**
+     * Gets the value of the codiceCig property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getCodiceCig() {
+        return codiceCig;
+    }
+
+    /**
+     * Sets the value of the codiceCig property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCodiceCig(String value) {
+        this.codiceCig = value;
+    }
+
+    /**
+     * Gets the value of the codiceCup property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getCodiceCup() {
+        return codiceCup;
+    }
+
+    /**
+     * Sets the value of the codiceCup property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCodiceCup(String value) {
+        this.codiceCup = value;
     }
 
 }

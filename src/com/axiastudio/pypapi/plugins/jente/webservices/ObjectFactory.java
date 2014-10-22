@@ -307,11 +307,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Attributo }
+     * 
+     */
+    public Attributo createAttributo() {
+        return new Attributo();
+    }
+
+    /**
      * Create an instance of {@link RichiestaGenerica }
      * 
      */
     public RichiestaGenerica createRichiestaGenerica() {
         return new RichiestaGenerica();
+    }
+
+    /**
+     * Create an instance of {@link Attributi }
+     * 
+     */
+    public Attributi createAttributi() {
+        return new Attributi();
     }
 
     /**

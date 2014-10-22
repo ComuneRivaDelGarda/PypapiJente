@@ -3,6 +3,7 @@ package com.axiastudio.pypapi.plugins.jente.webservices;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -28,6 +29,8 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="subImpacc" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="descImpacc" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="importoImpacc" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="liquidatoImpacc" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="ordinatoImpacc" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="oggetto" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="respProc" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="descRespProc" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -66,8 +69,14 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="progetto" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="descProgetto" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="codMeccanografico" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="codArmonizzato" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="codLibroIva" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="descLibroIva" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="pianoFinanziario" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="pianoFinanziarioDesc" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="missioneCapitolo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="ProgrammaMissioneCapitolo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="attributi" type="{http://infor.arezzo.it/jente/jfinanziaria/services}attributi" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -90,6 +99,8 @@ import javax.xml.bind.annotation.XmlType;
     "subImpacc",
     "descImpacc",
     "importoImpacc",
+    "liquidatoImpacc",
+    "ordinatoImpacc",
     "oggetto",
     "respProc",
     "descRespProc",
@@ -128,8 +139,14 @@ import javax.xml.bind.annotation.XmlType;
     "progetto",
     "descProgetto",
     "codMeccanografico",
+    "codArmonizzato",
     "codLibroIva",
-    "descLibroIva"
+    "descLibroIva",
+    "pianoFinanziario",
+    "pianoFinanziarioDesc",
+    "missioneCapitolo",
+    "programmaMissioneCapitolo",
+    "attributi"
 })
 public class ImpAcce {
 
@@ -145,6 +162,8 @@ public class ImpAcce {
     protected String subImpacc;
     protected String descImpacc;
     protected String importoImpacc;
+    protected String liquidatoImpacc;
+    protected String ordinatoImpacc;
     protected String oggetto;
     protected String respProc;
     protected String descRespProc;
@@ -183,8 +202,15 @@ public class ImpAcce {
     protected String progetto;
     protected String descProgetto;
     protected String codMeccanografico;
+    protected String codArmonizzato;
     protected String codLibroIva;
     protected String descLibroIva;
+    protected String pianoFinanziario;
+    protected String pianoFinanziarioDesc;
+    protected String missioneCapitolo;
+    @XmlElement(name = "ProgrammaMissioneCapitolo")
+    protected String programmaMissioneCapitolo;
+    protected Attributi attributi;
 
     /**
      * Gets the value of the archivio property.
@@ -472,6 +498,54 @@ public class ImpAcce {
      */
     public void setImportoImpacc(String value) {
         this.importoImpacc = value;
+    }
+
+    /**
+     * Gets the value of the liquidatoImpacc property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getLiquidatoImpacc() {
+        return liquidatoImpacc;
+    }
+
+    /**
+     * Sets the value of the liquidatoImpacc property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setLiquidatoImpacc(String value) {
+        this.liquidatoImpacc = value;
+    }
+
+    /**
+     * Gets the value of the ordinatoImpacc property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getOrdinatoImpacc() {
+        return ordinatoImpacc;
+    }
+
+    /**
+     * Sets the value of the ordinatoImpacc property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setOrdinatoImpacc(String value) {
+        this.ordinatoImpacc = value;
     }
 
     /**
@@ -1387,6 +1461,30 @@ public class ImpAcce {
     }
 
     /**
+     * Gets the value of the codArmonizzato property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getCodArmonizzato() {
+        return codArmonizzato;
+    }
+
+    /**
+     * Sets the value of the codArmonizzato property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCodArmonizzato(String value) {
+        this.codArmonizzato = value;
+    }
+
+    /**
      * Gets the value of the codLibroIva property.
      * 
      * @return
@@ -1432,6 +1530,126 @@ public class ImpAcce {
      */
     public void setDescLibroIva(String value) {
         this.descLibroIva = value;
+    }
+
+    /**
+     * Gets the value of the pianoFinanziario property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getPianoFinanziario() {
+        return pianoFinanziario;
+    }
+
+    /**
+     * Sets the value of the pianoFinanziario property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setPianoFinanziario(String value) {
+        this.pianoFinanziario = value;
+    }
+
+    /**
+     * Gets the value of the pianoFinanziarioDesc property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getPianoFinanziarioDesc() {
+        return pianoFinanziarioDesc;
+    }
+
+    /**
+     * Sets the value of the pianoFinanziarioDesc property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setPianoFinanziarioDesc(String value) {
+        this.pianoFinanziarioDesc = value;
+    }
+
+    /**
+     * Gets the value of the missioneCapitolo property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getMissioneCapitolo() {
+        return missioneCapitolo;
+    }
+
+    /**
+     * Sets the value of the missioneCapitolo property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setMissioneCapitolo(String value) {
+        this.missioneCapitolo = value;
+    }
+
+    /**
+     * Gets the value of the programmaMissioneCapitolo property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getProgrammaMissioneCapitolo() {
+        return programmaMissioneCapitolo;
+    }
+
+    /**
+     * Sets the value of the programmaMissioneCapitolo property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setProgrammaMissioneCapitolo(String value) {
+        this.programmaMissioneCapitolo = value;
+    }
+
+    /**
+     * Gets the value of the attributi property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Attributi }
+     *     
+     */
+    public Attributi getAttributi() {
+        return attributi;
+    }
+
+    /**
+     * Sets the value of the attributi property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Attributi }
+     *     
+     */
+    public void setAttributi(Attributi value) {
+        this.attributi = value;
     }
 
 }

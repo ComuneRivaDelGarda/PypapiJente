@@ -36,7 +36,11 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="dataEsecAttoImpegno" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="codiceCUP" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="codiceCIG" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="codiceCGU" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="listaSogg" type="{http://infor.arezzo.it/jente/jfinanziaria/services}FNLiquidazioniRigaSogg" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="campoLibero1" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="campoLibero2" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="campoLibero3" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -64,7 +68,11 @@ import javax.xml.bind.annotation.XmlType;
     "dataEsecAttoImpegno",
     "codiceCUP",
     "codiceCIG",
-    "listaSogg"
+    "codiceCGU",
+    "listaSogg",
+    "campoLibero1",
+    "campoLibero2",
+    "campoLibero3"
 })
 public class FNLiquidazioniRigaImp {
 
@@ -86,7 +94,11 @@ public class FNLiquidazioniRigaImp {
     protected String dataEsecAttoImpegno;
     protected String codiceCUP;
     protected String codiceCIG;
+    protected String codiceCGU;
     protected List<FNLiquidazioniRigaSogg> listaSogg;
+    protected String campoLibero1;
+    protected String campoLibero2;
+    protected String campoLibero3;
 
     /**
      * Gets the value of the anno property.
@@ -497,6 +509,30 @@ public class FNLiquidazioniRigaImp {
     }
 
     /**
+     * Gets the value of the codiceCGU property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getCodiceCGU() {
+        return codiceCGU;
+    }
+
+    /**
+     * Sets the value of the codiceCGU property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCodiceCGU(String value) {
+        this.codiceCGU = value;
+    }
+
+    /**
      * Gets the value of the listaSogg property.
      * 
      * <p>
@@ -523,6 +559,78 @@ public class FNLiquidazioniRigaImp {
             listaSogg = new ArrayList<FNLiquidazioniRigaSogg>();
         }
         return this.listaSogg;
+    }
+
+    /**
+     * Gets the value of the campoLibero1 property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getCampoLibero1() {
+        return campoLibero1;
+    }
+
+    /**
+     * Sets the value of the campoLibero1 property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCampoLibero1(String value) {
+        this.campoLibero1 = value;
+    }
+
+    /**
+     * Gets the value of the campoLibero2 property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getCampoLibero2() {
+        return campoLibero2;
+    }
+
+    /**
+     * Sets the value of the campoLibero2 property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCampoLibero2(String value) {
+        this.campoLibero2 = value;
+    }
+
+    /**
+     * Gets the value of the campoLibero3 property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getCampoLibero3() {
+        return campoLibero3;
+    }
+
+    /**
+     * Sets the value of the campoLibero3 property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCampoLibero3(String value) {
+        this.campoLibero3 = value;
     }
 
 }
