@@ -111,7 +111,7 @@ public class JEnteHelper {
             rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setNumero(numero);
             rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setData(dataBozzaOAtto);
 //            rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setOggetto("Inserimento automatico: "+anno+" "+numero);
-            rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setOggetto(oggetto);
+            rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setOggetto(oggetto.substring(0, Math.min(oggetto.length(), 254)));
             rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setValidoVariazioni(validoVariazioni);
             rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setValidoImpegni(validoImpegni);
             rec.getRichiestaInserimentoBozzaOAtto().getBozzaOAtto().setValidoAccertamenti(validoAccertamenti);
